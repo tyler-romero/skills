@@ -1,0 +1,4 @@
+interface:
+  display_name: "Read arXiv Paper"
+  short_description: "Read arXiv papers from their TeX source"
+  default_prompt: "Use $read-arxiv-paper to analyze this arXiv paper and relate it to the current project."

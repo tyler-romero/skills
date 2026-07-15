@@ -17,13 +17,17 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
     ├── .claude-plugin/plugin.json              # Claude Code manifest
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
+        ├── chrome-cdp/                          # Control authenticated Chrome tabs
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
         ├── local-code-review/                   # Review without modifying a PR
-        └── portable-smoke-test/                 # Verify cross-host loading
+        ├── portable-smoke-test/                 # Verify cross-host loading
+        └── read-arxiv-paper/                    # Analyze papers from TeX source
 ```
 
 The extra manifest and metadata files are additive. Hosts ignore files they do not understand.
+
+`read-arxiv-paper` is adapted from `karpathy/nanochat` and retains its upstream MIT license in the skill directory.
 
 ## Current compatibility
 

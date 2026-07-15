@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chrome CDP"
+  short_description: "Launch and control authenticated Chrome via CDP"
+  default_prompt: "Use $chrome-cdp to open the debugging profile, let me authenticate, then operate the browser."
