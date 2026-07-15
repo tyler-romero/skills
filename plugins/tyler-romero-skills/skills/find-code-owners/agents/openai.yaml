@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Code Owners"
+  short_description: "Rank likely owners from repository history"
+  default_prompt: "Use $find-code-owners to recommend the best owners for my changed files."

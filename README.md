@@ -18,6 +18,7 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
         ├── chrome-cdp/                          # Control authenticated Chrome tabs
+        ├── find-code-owners/                    # Rank owners from Git history
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
         ├── local-code-review/                   # Review without modifying a PR
