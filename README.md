@@ -17,9 +17,10 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
     ├── .claude-plugin/plugin.json              # Claude Code manifest
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
-        └── portable-smoke-test/
-            ├── SKILL.md                        # Shared skill definition
-            └── agents/openai.yaml              # Optional Codex UI metadata
+        ├── grill-me/                            # Stress-test plans and designs
+        ├── handoff/                             # Prepare work for a fresh agent
+        ├── local-code-review/                   # Review without modifying a PR
+        └── portable-smoke-test/                 # Verify cross-host loading
 ```
 
 The extra manifest and metadata files are additive. Hosts ignore files they do not understand.
@@ -68,7 +69,7 @@ codex plugin add tyler-romero-skills@tyler-romero-skills
 
 Start a new task/session after installation so the host reloads its available skills.
 
-## Update installed copies
+## Sync installations
 
 Run the cross-platform updater:
 
@@ -77,6 +78,20 @@ Run the cross-platform updater:
 ```
 
 It updates `tyler-romero-skills` wherever it is already installed. When a supported CLI is present but the plugin is missing, the script adds the `tyler-romero/skills` marketplace and installs it. Missing CLIs are reported and skipped. A real installation or update failure returns a nonzero exit code. The script requires Bash and Python 3.
+
+The sync also installs or upgrades the maintained [`github/gh-stack`](https://github.com/github/gh-stack) GitHub CLI extension and installs its upstream `gh-stack` Agent Skill for Copilot, Claude Code, and Codex. The upstream skill remains source-tracked, so it can be refreshed without vendoring it into this repository.
+
+To install the dependency manually instead:
+
+```bash
+gh extension install github/gh-stack
+
+for agent in github-copilot claude-code codex; do
+  gh skill install github/gh-stack gh-stack --agent "$agent" --scope user --force
+done
+```
+
+The `gh skill` command is currently a GitHub CLI preview feature.
 
 ## Run the smoke test
 

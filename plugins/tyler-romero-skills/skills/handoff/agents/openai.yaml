@@ -1,0 +1,4 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Create a safe continuation document"
+  default_prompt: "Use $handoff to prepare this task for a fresh agent."

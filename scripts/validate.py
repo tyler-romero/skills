@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "tyler-romero-skills"
 EXPECTED_NAME = "tyler-romero-skills"
-EXPECTED_VERSION = "0.1.0"
+EXPECTED_VERSION = "0.2.0"
 EXPECTED_SOURCE = "./plugins/tyler-romero-skills"
 
 

@@ -1,6 +1,6 @@
 {
   "name": "tyler-romero-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Portable agent skills shared across GitHub Copilot, Claude Code, and Codex",
   "author": {
     "name": "Tyler Romero",
@@ -18,7 +18,9 @@
     "category": "Productivity",
     "capabilities": ["Skills"],
     "defaultPrompt": [
-      "Run the portable skill smoke test for violet-otter."
+      "Review my changes locally without modifying the PR.",
+      "Grill me on this design one decision at a time.",
+      "Prepare a handoff for a fresh agent."
     ]
   }
 }

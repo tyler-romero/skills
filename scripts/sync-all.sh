@@ -11,6 +11,7 @@ plugin_name="tyler-romero-skills"
 marketplace="tyler-romero-skills"
 marketplace_source="tyler-romero/skills"
 plugin_id="${plugin_name}@${marketplace}"
+gh_stack_repo="github/gh-stack"
 failures=0
 
 skip() {
@@ -139,9 +140,39 @@ print(next((plugin.get("scope", "") for plugin in plugins if plugin.get("id") ==
   fi
 }
 
+sync_gh_stack() {
+  command -v gh >/dev/null 2>&1 || { skip gh-stack 'GitHub CLI not installed'; return; }
+
+  if gh extension list 2>/dev/null | grep -Fq "$gh_stack_repo"; then
+    printf '[gh-stack] updating GitHub CLI extension\n'
+    gh extension upgrade gh-stack || { fail gh-stack; return; }
+  else
+    printf '[gh-stack] installing GitHub CLI extension\n'
+    gh extension install "$gh_stack_repo" || { fail gh-stack; return; }
+  fi
+
+  local target agent cli
+  for target in github-copilot:copilot claude-code:claude codex:codex; do
+    agent="${target%%:*}"
+    cli="${target##*:}"
+    command -v "$cli" >/dev/null 2>&1 || {
+      skip "gh-stack/$agent" 'host CLI not installed'
+      continue
+    }
+
+    printf '[gh-stack/%s] installing maintained upstream skill\n' "$agent"
+    if gh skill install "$gh_stack_repo" gh-stack --agent "$agent" --scope user --force; then
+      printf '[gh-stack/%s] synced\n' "$agent"
+    else
+      fail "gh-stack/$agent"
+    fi
+  done
+}
+
 sync_codex
 sync_copilot
 sync_claude
+sync_gh_stack
 
 if ((failures > 0)); then
   printf 'Finished with %d failed update(s).\n' "$failures" >&2
