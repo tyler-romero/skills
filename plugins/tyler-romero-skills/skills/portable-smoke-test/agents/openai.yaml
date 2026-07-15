@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portable Smoke Test"
+  short_description: "Verify shared skill loading across agents"
+  default_prompt: "Use $portable-smoke-test to run the portable skill smoke test for violet-otter."

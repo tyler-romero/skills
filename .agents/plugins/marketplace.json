@@ -1,0 +1,20 @@
+{
+  "name": "tyler-romero-skills",
+  "interface": {
+    "displayName": "Tyler Romero Skills"
+  },
+  "plugins": [
+    {
+      "name": "tyler-romero-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tyler-romero-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "tyler-romero-skills",
+  "version": "0.1.0",
+  "description": "Portable agent skills shared across GitHub Copilot, Claude Code, and Codex",
+  "author": {
+    "name": "Tyler Romero",
+    "url": "https://github.com/tyler-romero"
+  },
+  "repository": "https://github.com/tyler-romero/skills",
+  "license": "Apache-2.0",
+  "keywords": ["agent-skills", "copilot", "claude", "codex"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Tyler Romero Skills",
+    "shortDescription": "Portable skills for coding agents",
+    "longDescription": "A shared collection of Agent Skills that can be installed in GitHub Copilot, Claude Code, and OpenAI Codex.",
+    "developerName": "Tyler Romero",
+    "category": "Productivity",
+    "capabilities": ["Skills"],
+    "defaultPrompt": [
+      "Run the portable skill smoke test for violet-otter."
+    ]
+  }
+}

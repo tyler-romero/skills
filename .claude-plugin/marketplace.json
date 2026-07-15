@@ -1,0 +1,25 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "tyler-romero-skills",
+  "owner": {
+    "name": "Tyler Romero"
+  },
+  "metadata": {
+    "description": "Portable agent skills for GitHub Copilot, Claude Code, and Codex",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "tyler-romero-skills",
+      "description": "Portable agent skills shared across coding agents",
+      "version": "0.1.0",
+      "author": {
+        "name": "Tyler Romero"
+      },
+      "source": "./plugins/tyler-romero-skills",
+      "repository": "https://github.com/tyler-romero/skills",
+      "license": "Apache-2.0",
+      "keywords": ["agent-skills", "copilot", "claude", "codex"]
+    }
+  ]
+}

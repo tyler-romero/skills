@@ -1,0 +1,12 @@
+{
+  "name": "tyler-romero-skills",
+  "description": "Portable agent skills shared across GitHub Copilot, Claude Code, and Codex",
+  "version": "0.1.0",
+  "author": {
+    "name": "Tyler Romero"
+  },
+  "repository": "https://github.com/tyler-romero/skills",
+  "license": "Apache-2.0",
+  "keywords": ["agent-skills", "copilot", "claude", "codex"],
+  "skills": "./skills/"
+}
