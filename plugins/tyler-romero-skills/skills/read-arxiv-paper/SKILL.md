@@ -29,7 +29,7 @@ https://arxiv.org/src/<arxiv-id>
 Use this cache layout, replacing `/` in legacy identifiers with `_` when creating local paths:
 
 ```text
-~/.cache/agent-skills/arxiv/<safe-arxiv-id>/
+~/.cache/agent-skills/arxiv/source/<safe-arxiv-id>/
 ├── source-archive
 └── source/
 ```
@@ -74,10 +74,10 @@ Skip project-specific recommendations when there is no relevant project context 
 
 ## 7. Write the report
 
-Create `knowledge/` under the current workspace and write:
+Create `~/.cache/agent-skills/arxiv/knowledge` and write:
 
 ```text
-knowledge/summary_<descriptive-tag>.md
+~/.cache/agent-skills/arxiv/knowledge/summary_<descriptive-tag>.md
 ```
 
 Choose a short tag based on the paper topic. Never overwrite an existing summary; add a numeric suffix when necessary.
