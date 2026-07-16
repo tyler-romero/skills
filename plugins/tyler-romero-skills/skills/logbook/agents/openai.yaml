@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logbook"
+  short_description: "Track work history and experiment status"
+  default_prompt: "Use $logbook to summarize my recent recorded work and experiment status."

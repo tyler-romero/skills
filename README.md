@@ -22,6 +22,7 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
         ├── local-code-review/                   # Review without modifying a PR
+        ├── logbook/                             # Track work and experiment history
         ├── portable-smoke-test/                 # Verify cross-host loading
         └── read-arxiv-paper/                    # Analyze papers from TeX source
 ```
