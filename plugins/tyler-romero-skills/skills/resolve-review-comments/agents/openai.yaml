@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resolve Review Comments"
+  short_description: "Resolve PR feedback one thread at a time"
+  default_prompt: "Use $resolve-review-comments to work through the open review comments on this pull request."

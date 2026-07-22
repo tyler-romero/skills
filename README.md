@@ -24,7 +24,8 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
         ├── local-code-review/                   # Review without modifying a PR
         ├── logbook/                             # Track work and experiment history
         ├── portable-smoke-test/                 # Verify cross-host loading
-        └── read-arxiv-paper/                    # Analyze papers from TeX source
+        ├── read-arxiv-paper/                    # Analyze papers from TeX source
+        └── resolve-review-comments/             # Resolve PR feedback one thread at a time
 ```
 
 The extra manifest and metadata files are additive. Hosts ignore files they do not understand.
