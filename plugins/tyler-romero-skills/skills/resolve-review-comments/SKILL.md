@@ -50,10 +50,11 @@ For a thread that still applies, present:
 - A clear recommendation: address it or do not address it.
 - If recommending a change, a brief implementation outline, likely files affected, and intended validation.
 - If recommending no change, the technical reason and any tradeoff.
+- If recommending a reply to the reviewer, a clearly labeled draft response containing the exact proposed text. Show the draft in the conversation; do not publish it to GitHub yet.
 
 Ask for the user's decision before editing. Do not bundle decisions for several threads into one question.
 
-If the user agrees not to address the comment, leave the thread unresolved and move to the next one. Reply to or resolve it only with separate explicit authorization.
+If the user agrees not to address the comment, leave the thread unresolved and move to the next one. When the proposal includes a draft response, ask whether to publish that exact response. Publish it only after explicit approval, and do not resolve the thread unless the user separately authorizes resolution.
 
 ## 4. Implement the approved recommendation
 
