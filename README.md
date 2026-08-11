@@ -21,6 +21,7 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
         ├── find-code-owners/                    # Rank owners from Git history
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
+        ├── latex-report/                        # Create polished LaTeX reports and papers
         ├── local-code-review/                   # Review without modifying a PR
         ├── logbook/                             # Track work and experiment history
         ├── portable-smoke-test/                 # Verify cross-host loading

@@ -1,0 +1,203 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{latex-report}[2026/08/11 Restrained institutional technical-report style]
+
+\RequirePackage[letterpaper,top=0.78in,bottom=0.84in,left=0.96in,right=0.96in]{geometry}
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{newpxtext,newpxmath}
+  \RequirePackage[scaled=0.91]{helvet}
+\else
+  \RequirePackage{fontspec}
+  \RequirePackage{unicode-math}
+  \setmainfont{texgyrepagella-regular.otf}[
+    BoldFont=texgyrepagella-bold.otf,
+    ItalicFont=texgyrepagella-italic.otf,
+    BoldItalicFont=texgyrepagella-bolditalic.otf
+  ]
+  \setsansfont{texgyreheros-regular.otf}[
+    BoldFont=texgyreheros-bold.otf,
+    ItalicFont=texgyreheros-italic.otf,
+    BoldItalicFont=texgyreheros-bolditalic.otf,
+    Scale=0.91
+  ]
+  \setmonofont{lmmono10-regular.otf}
+  \setmathfont{texgyrepagella-math.otf}
+\fi
+
+\RequirePackage{microtype}
+\RequirePackage{graphicx}
+\RequirePackage{flafter}
+\RequirePackage{placeins}
+\RequirePackage{needspace}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{enumitem}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{caption}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{breakable}
+\RequirePackage{xurl}
+\RequirePackage[round,authoryear]{natbib}
+\RequirePackage{hyperref}
+\RequirePackage{etoolbox}
+
+\definecolor{ReportInk}{HTML}{231F20}
+\definecolor{ReportMuted}{HTML}{6B625B}
+\definecolor{ReportAccent}{HTML}{4F7C80}
+\definecolor{ReportRule}{HTML}{756E69}
+\definecolor{ReportPanel}{HTML}{F5F4F2}
+\definecolor{ReportPanelRule}{HTML}{D5D1CD}
+
+\newcommand{\ReportSeries}{}
+\newcommand{\ReportTitle}{Untitled Report}
+\newcommand{\ReportAuthors}{}
+\newcommand{\ReportPDFAuthors}{}
+\newcommand{\ReportAffiliations}{}
+\newcommand{\ReportCorrespondence}{}
+\newcommand{\ReportDate}{}
+\newcommand{\ReportLinks}{}
+\newcommand{\ReportKeywords}{}
+\newcommand{\ModelName}[1]{\textsc{#1}}
+\newcommand{\best}[1]{\textbf{#1}}
+\newcommand{\second}[1]{\underline{#1}}
+
+\newif\iflongreport
+\longreportfalse
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ReportAccent,
+  citecolor=ReportAccent,
+  urlcolor=ReportAccent
+}
+
+\AtBeginDocument{%
+  \color{ReportInk}%
+  \frenchspacing
+  \hypersetup{
+    pdftitle={\ReportTitle},
+    pdfauthor={\ReportPDFAuthors},
+    pdfsubject={\ReportSeries}
+  }%
+}
+\setlength{\parindent}{1.05em}
+\setlength{\parskip}{0pt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\emergencystretch=1.5em
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+\titleformat{\section}
+  {\Large\sffamily\bfseries\color{ReportInk}}
+  {\thesection}{0.7em}{}
+  [\vspace{0.34em}\color{ReportRule}\titlerule]
+\titleformat{\subsection}
+  {\large\sffamily\bfseries\color{ReportInk}}
+  {\thesubsection}{0.65em}{}
+\titleformat{\subsubsection}
+  {\normalsize\sffamily\bfseries\color{ReportInk}}
+  {\thesubsubsection}{0.6em}{}
+\titleformat{\paragraph}[runin]
+  {\normalsize\sffamily\bfseries\color{ReportInk}}
+  {}{0pt}{}[.]
+\titlespacing*{\section}{0pt}{1.65em}{0.6em}
+\titlespacing*{\subsection}{0pt}{1.25em}{0.4em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.3em}
+\titlespacing*{\paragraph}{0pt}{0.75em}{0.45em}
+
+\captionsetup{
+  font=small,
+  labelfont={bf,sf,color=ReportInk},
+  textfont={color=ReportInk},
+  justification=raggedright,
+  singlelinecheck=false,
+  skip=5pt
+}
+
+\setlist[itemize]{leftmargin=1.45em,itemsep=0.08em,topsep=0.25em,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.65em,itemsep=0.08em,topsep=0.25em,parsep=0pt}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\textfloatsep}{1.15em plus 0.25em minus 0.2em}
+\setlength{\floatsep}{1.0em plus 0.2em minus 0.15em}
+\setlength{\intextsep}{1.0em plus 0.2em minus 0.15em}
+\renewcommand{\topfraction}{0.88}
+\renewcommand{\bottomfraction}{0.72}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.82}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{1}
+\setcounter{totalnumber}{3}
+
+\pretocmd{\section}{\FloatBarrier\Needspace{8\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{6\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{5\baselineskip}}{}{}
+\newcommand{\ReportFloatBarrier}{\FloatBarrier}
+
+\newenvironment{reportabstract}{%
+  \begin{tcolorbox}[
+    breakable,
+    colback=ReportPanel,
+    colframe=ReportPanelRule,
+    boxrule=0.45pt,
+    arc=0pt,
+    outer arc=0pt,
+    boxsep=0pt,
+    left=0.85em,
+    right=0.85em,
+    top=0.72em,
+    bottom=0.72em,
+    before skip=0.55em,
+    after skip=1.0em
+  ]
+  \begingroup
+  \noindent{\sffamily\normalsize\bfseries Abstract\par}
+  \vspace{0.32em}\noindent\ignorespaces
+}{%
+  \ifdefempty{\ReportKeywords}{}{%
+    \par\vspace{0.45em}\noindent\textbf{Keywords:} \ReportKeywords}
+  \par\endgroup
+  \end{tcolorbox}
+}
+
+\newcommand{\makereporttitle}{%
+  \begin{flushleft}
+    \ifdefempty{\ReportSeries}{}{%
+      {\fontsize{13.5}{16}\selectfont\sffamily\color{ReportMuted}\ReportSeries\par}
+      \vspace{0.6em}}
+    {\fontsize{23}{27}\selectfont\bfseries\color{ReportInk}\ReportTitle\par}
+    \ifdefempty{\ReportAuthors}{}{%
+      \vspace{0.65em}{\sffamily\normalsize\ReportAuthors\par}}
+    \ifdefempty{\ReportAffiliations}{}{%
+      \vspace{0.3em}{\small\ReportAffiliations\par}}
+    \ifdefempty{\ReportDate}{}{%
+      \vspace{0.25em}{\small\color{ReportMuted}\ReportDate\par}}
+    \ifdefempty{\ReportLinks}{}{%
+      \vspace{0.35em}{\small\sffamily\color{ReportAccent}\ReportLinks\par}}
+    \ifdefempty{\ReportCorrespondence}{}{%
+      \vspace{0.2em}{\footnotesize\color{ReportMuted}Correspondence:
+      \href{mailto:\ReportCorrespondence}{\nolinkurl{\ReportCorrespondence}}\par}}
+  \end{flushleft}
+  \vspace{0.45em}
+}
+
+\newcommand{\ReportTableOfContents}{%
+  \iflongreport
+    \clearpage
+    \tableofcontents
+    \clearpage
+  \fi
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small\color{ReportMuted}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}

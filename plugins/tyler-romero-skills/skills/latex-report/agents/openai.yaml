@@ -1,0 +1,6 @@
+interface:
+  display_name: "LaTeX Report"
+  short_description: "Create polished LaTeX reports and papers"
+  default_prompt: "Use $latex-report to turn these materials into a polished, content-adaptive LaTeX report and compiled PDF."
+policy:
+  allow_implicit_invocation: false

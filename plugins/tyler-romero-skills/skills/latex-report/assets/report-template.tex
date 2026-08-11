@@ -1,0 +1,35 @@
+\documentclass[10pt]{article}
+\usepackage{latex-report}
+
+% Replace placeholders manually, or scaffold this file with scripts/build_report.py.
+\renewcommand{\ReportSeries}{[[REPORT_SERIES]]}
+\renewcommand{\ReportTitle}{[[REPORT_TITLE]]}
+\renewcommand{\ReportAuthors}{[[REPORT_AUTHORS]]}
+\renewcommand{\ReportPDFAuthors}{[[REPORT_PDF_AUTHORS]]}
+\renewcommand{\ReportAffiliations}{[[REPORT_AFFILIATIONS]]}
+\renewcommand{\ReportCorrespondence}{[[REPORT_CORRESPONDENCE]]}
+\renewcommand{\ReportDate}{[[REPORT_DATE]]}
+\renewcommand{\ReportLinks}{[[REPORT_LINKS]]}
+\renewcommand{\ReportKeywords}{[[REPORT_KEYWORDS]]}
+
+[[LONG_REPORT_SETTING]]
+
+\begin{document}
+
+\makereporttitle
+
+\begin{reportabstract}
+[[ABSTRACT]]
+\end{reportabstract}
+
+\ReportTableOfContents
+
+% [[SECTIONS]]
+
+% Enable after adding cited entries to references.bib:
+% \bibliographystyle{plainnat}
+% \bibliography{references}
+
+% [[APPENDICES]]
+
+\end{document}
