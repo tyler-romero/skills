@@ -17,7 +17,6 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
     ├── .claude-plugin/plugin.json              # Claude Code manifest
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
-        ├── chrome-cdp/                          # Control authenticated Chrome tabs
         ├── find-code-owners/                    # Rank owners from Git history
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
