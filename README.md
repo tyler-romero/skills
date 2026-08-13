@@ -26,7 +26,8 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
         ├── logbook/                             # Track work and experiment history
         ├── portable-smoke-test/                 # Verify cross-host loading
         ├── read-arxiv-paper/                    # Analyze papers from TeX source
-        └── resolve-review-comments/             # Resolve PR feedback one thread at a time
+        ├── resolve-review-comments/             # Resolve PR feedback one thread at a time
+        └── show-me/                             # Explain topics with focused visuals
 ```
 
 The extra manifest and metadata files are additive. Hosts ignore files they do not understand.
