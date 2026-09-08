@@ -1,12 +1,12 @@
 # Tyler Romero Skills
 
-A portable Agent Skills repository for GitHub Copilot, Claude Code, and OpenAI Codex.
+A portable Agent Skills repository for GitHub Copilot, Claude Code, OpenAI Codex, and Muse.
 
 The skill content is defined once under `plugins/tyler-romero-skills/skills/`. Each host gets only the small manifest or marketplace file it needs.
 
 ## How portability works
 
-All three hosts support the open Agent Skills shape: a directory containing a `SKILL.md` file with `name` and `description` YAML frontmatter. Their plugin packaging is not yet standardized, so this repository supplies parallel adapters around one shared skill tree.
+All four hosts support the open Agent Skills shape: a directory containing a `SKILL.md` file with `name` and `description` YAML frontmatter. Their plugin packaging is not yet standardized, so this repository supplies parallel adapters around one shared skill tree.
 
 ```text
 .
@@ -27,6 +27,7 @@ All three hosts support the open Agent Skills shape: a directory containing a `S
         ├── portable-smoke-test/                 # Verify cross-host loading
         ├── read-arxiv-paper/                    # Analyze papers from TeX source
         ├── resolve-review-comments/             # Resolve PR feedback one thread at a time
+        ├── slack-pr-inbox/                      # Track personal PR review requests from Slack
         └── show-me/                             # Explain topics with focused visuals
 ```
 
@@ -41,6 +42,7 @@ The extra manifest and metadata files are additive. Hosts ignore files they do n
 | GitHub Copilot CLI | Yes | Yes | Copilot plugins are currently CLI-only. Other Copilot surfaces discover repository/user skills instead. |
 | Claude Code | Yes | Yes | Plugin skills are namespaced by plugin when invoked explicitly. |
 | OpenAI Codex | Yes | Yes | Codex uses its own plugin manifest and marketplace catalog. |
+| Muse | Yes (per-skill) | Yes | Installed via `muse skills install <path> --scope user`; each `SKILL.md` is installed individually. |
 
 For GitHub Copilot coding agent or editor discovery without the CLI plugin, copy or symlink a skill folder into a supported skill location such as `.github/skills`, `.agents/skills`, or `$HOME/.copilot/skills`, depending on the surface and desired scope.
 
@@ -76,6 +78,23 @@ codex plugin marketplace add tyler-romero/skills
 codex plugin add tyler-romero-skills@tyler-romero-skills
 ```
 
+### Muse
+
+```bash
+# Install each skill individually (Muse manages skills per-skill, not via marketplace)
+for skill in plugins/tyler-romero-skills/skills/*/; do
+  muse skills install "$skill" --scope user --force
+done
+```
+
+Alternatively import from an existing host:
+
+```bash
+muse skills import --from claude --scope user
+# or
+muse skills import --from codex --scope user
+```
+
 Start a new task/session after installation so the host reloads its available skills.
 
 ## Sync installations
@@ -86,7 +105,7 @@ Run the cross-platform updater:
 ./scripts/sync-all.sh
 ```
 
-It updates `tyler-romero-skills` wherever it is already installed. When a supported CLI is present but the plugin is missing, the script adds the `tyler-romero/skills` marketplace and installs it. Missing CLIs are reported and skipped. A real installation or update failure returns a nonzero exit code. The script requires Bash and Python 3.
+It updates `tyler-romero-skills` wherever it is already installed. When a supported CLI is present but the plugin is missing, the script adds the `tyler-romero/skills` marketplace and installs it (for Muse, each `SKILL.md` is installed individually via `muse skills install --scope user`). Missing CLIs are reported and skipped. A real installation or update failure returns a nonzero exit code. The script requires Bash and Python 3.
 
 The sync also installs or upgrades the maintained [`github/gh-stack`](https://github.com/github/gh-stack) GitHub CLI extension and installs its upstream `gh-stack` Agent Skill for Copilot, Claude Code, and Codex. The upstream skill remains source-tracked, so it can be refreshed without vendoring it into this repository.
 
@@ -123,6 +142,7 @@ Explicit invocation is host-specific:
 - Claude Code: `/tyler-romero-skills:portable-smoke-test Run for violet-otter.`
 - Codex: `Use $portable-smoke-test to run for violet-otter.`
 - Copilot CLI: select the skill with `/skills` or ask with the natural trigger above.
+- Muse: skills are auto-discovered; ask naturally or check `muse skills list`.
 
 ## Add another skill
 

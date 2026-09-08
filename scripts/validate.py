@@ -8,11 +8,10 @@ import re
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins" / "tyler-romero-skills"
 EXPECTED_NAME = "tyler-romero-skills"
-EXPECTED_VERSION = "0.8.0"
+EXPECTED_VERSION = "0.9.0"
 EXPECTED_SOURCE = "./plugins/tyler-romero-skills"
 
 
@@ -37,8 +36,11 @@ def validate_skill(path: Path) -> str:
     description = re.search(r"^description:\s*\S.*$", frontmatter, re.MULTILINE)
     require(name is not None, f"{path.relative_to(ROOT)}: missing name")
     require(description is not None, f"{path.relative_to(ROOT)}: missing description")
-    skill_name = name.group(1).strip().strip('"\'')
-    require(path.parent.name == skill_name, f"{path.relative_to(ROOT)}: folder/name mismatch")
+    skill_name = name.group(1).strip().strip("\"'")
+    require(
+        path.parent.name == skill_name,
+        f"{path.relative_to(ROOT)}: folder/name mismatch",
+    )
     return skill_name
 
 
@@ -50,24 +52,54 @@ def main() -> int:
         shared_marketplace = load_json(ROOT / ".claude-plugin" / "marketplace.json")
         codex_marketplace = load_json(ROOT / ".agents" / "plugins" / "marketplace.json")
 
-        for label, manifest in (("Copilot", copilot), ("Claude", claude), ("Codex", codex)):
-            require(manifest.get("name") == EXPECTED_NAME, f"{label}: plugin name mismatch")
-            require(manifest.get("version") == EXPECTED_VERSION, f"{label}: version mismatch")
+        for label, manifest in (
+            ("Copilot", copilot),
+            ("Claude", claude),
+            ("Codex", codex),
+        ):
+            require(
+                manifest.get("name") == EXPECTED_NAME, f"{label}: plugin name mismatch"
+            )
+            require(
+                manifest.get("version") == EXPECTED_VERSION,
+                f"{label}: version mismatch",
+            )
 
         require(copilot.get("skills") == ["skills/"], "Copilot: skills path mismatch")
         require(claude.get("skills") == "./skills/", "Claude: skills path mismatch")
         require(codex.get("skills") == "./skills/", "Codex: skills path mismatch")
 
-        require(shared_marketplace.get("name") == EXPECTED_NAME, "Claude/Copilot marketplace name mismatch")
-        require(codex_marketplace.get("name") == EXPECTED_NAME, "Codex marketplace name mismatch")
+        require(
+            shared_marketplace.get("name") == EXPECTED_NAME,
+            "Claude/Copilot marketplace name mismatch",
+        )
+        require(
+            codex_marketplace.get("name") == EXPECTED_NAME,
+            "Codex marketplace name mismatch",
+        )
 
         shared_entry = shared_marketplace["plugins"][0]
         codex_entry = codex_marketplace["plugins"][0]
-        require(shared_entry.get("name") == EXPECTED_NAME, "Claude/Copilot marketplace plugin mismatch")
-        require(codex_entry.get("name") == EXPECTED_NAME, "Codex marketplace plugin mismatch")
-        require(shared_entry.get("version") == EXPECTED_VERSION, "Claude/Copilot marketplace version mismatch")
-        require(shared_entry.get("source") == EXPECTED_SOURCE, "Shared marketplace source mismatch")
-        require(codex_entry["source"].get("path") == EXPECTED_SOURCE, "Codex marketplace source mismatch")
+        require(
+            shared_entry.get("name") == EXPECTED_NAME,
+            "Claude/Copilot marketplace plugin mismatch",
+        )
+        require(
+            codex_entry.get("name") == EXPECTED_NAME,
+            "Codex marketplace plugin mismatch",
+        )
+        require(
+            shared_entry.get("version") == EXPECTED_VERSION,
+            "Claude/Copilot marketplace version mismatch",
+        )
+        require(
+            shared_entry.get("source") == EXPECTED_SOURCE,
+            "Shared marketplace source mismatch",
+        )
+        require(
+            codex_entry["source"].get("path") == EXPECTED_SOURCE,
+            "Codex marketplace source mismatch",
+        )
 
         skill_files = sorted((PLUGIN / "skills").glob("*/SKILL.md"))
         require(bool(skill_files), "No skills found")

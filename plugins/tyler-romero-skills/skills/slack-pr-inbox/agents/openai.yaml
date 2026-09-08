@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slack PR Inbox"
+  short_description: "Reconcile Slack review requests with GitHub"
+  default_prompt: "Use $slack-pr-inbox to show my outstanding pull request review requests from Slack."

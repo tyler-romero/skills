@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Synchronize tyler-romero-skills across Codex, GitHub Copilot, and Claude Code.
+# Synchronize tyler-romero-skills across Codex, GitHub Copilot, Claude Code, and Muse.
 # For each available CLI, update an existing installation or add the
-# tyler-romero/skills marketplace and install the plugin when it is missing.
+# tyler-romero/skills marketplace and install the plugin (or skills) when missing.
 # Skip unavailable CLIs and exit nonzero if any installation or update fails.
 
 set -u
@@ -140,6 +140,36 @@ print(next((plugin.get("scope", "") for plugin in plugins if plugin.get("id") ==
   fi
 }
 
+sync_muse() {
+  command -v muse >/dev/null 2>&1 || { skip Muse 'CLI not installed'; return; }
+
+  local script_dir skills_dir skill_path skill_name skill_failures
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  skills_dir="${script_dir}/../plugins/tyler-romero-skills/skills"
+  if [[ ! -d "$skills_dir" ]]; then
+    fail Muse "skills directory not found: $skills_dir"
+    return
+  fi
+
+  skill_failures=0
+  for skill_path in "$skills_dir"/*/; do
+    [[ -d "$skill_path" ]] || continue
+    skill_name="$(basename "$skill_path")"
+    printf '[Muse] syncing skill %s\n' "$skill_name"
+    if output="$(muse skills install "$skill_path" --scope user --force 2>&1)"; then
+      printf '[Muse] synced %s\n' "$skill_name"
+    else
+      printf '%s\n' "$output" >&2
+      fail "Muse/$skill_name" "install failed for $skill_path"
+      skill_failures=$((skill_failures + 1))
+    fi
+  done
+
+  if ((skill_failures == 0)); then
+    printf '[Muse] all skills synced\n'
+  fi
+}
+
 sync_gh_stack() {
   command -v gh >/dev/null 2>&1 || { skip gh-stack 'GitHub CLI not installed'; return; }
 
@@ -172,6 +202,7 @@ sync_gh_stack() {
 sync_codex
 sync_copilot
 sync_claude
+sync_muse
 sync_gh_stack
 
 if ((failures > 0)); then
