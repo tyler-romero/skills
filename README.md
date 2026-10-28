@@ -18,6 +18,7 @@ All four hosts support the open Agent Skills shape: a directory containing a `SK
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
         ├── chrome-cdp/                          # Control authenticated Chrome tabs
+        ├── excalidraw-diagrams/                 # Author and render Excalidraw PNGs and GIFs
         ├── find-code-owners/                    # Rank owners from Git history
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent

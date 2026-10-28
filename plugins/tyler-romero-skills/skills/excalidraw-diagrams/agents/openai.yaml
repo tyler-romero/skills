@@ -1,0 +1,4 @@
+interface:
+  display_name: "Excalidraw Diagrams"
+  short_description: "Create, render, and verify Excalidraw diagrams and GIFs"
+  default_prompt: "Use $excalidraw-diagrams to create or update an Excalidraw diagram and render its PNG or GIF assets."
