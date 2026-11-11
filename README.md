@@ -18,18 +18,17 @@ All four hosts support the open Agent Skills shape: a directory containing a `SK
     ├── .codex-plugin/plugin.json               # Codex manifest
     └── skills/
         ├── chrome-cdp/                          # Control authenticated Chrome tabs
+        ├── dictation-to-artifact/               # Turn dictated text into polished artifacts
         ├── excalidraw-diagrams/                 # Author and render Excalidraw PNGs and GIFs
         ├── find-code-owners/                    # Rank owners from Git history
         ├── grill-me/                            # Stress-test plans and designs
         ├── handoff/                             # Prepare work for a fresh agent
         ├── latex-report/                        # Create polished LaTeX reports and papers
         ├── local-code-review/                   # Review without modifying a PR
-        ├── logbook/                             # Track work and experiment history
         ├── portable-smoke-test/                 # Verify cross-host loading
         ├── read-arxiv-paper/                    # Analyze papers from TeX source
         ├── resolve-review-comments/             # Resolve PR feedback one thread at a time
         ├── show-me/                             # Explain topics with focused visuals
-        ├── slack-pr-inbox/                      # Track personal PR review requests from Slack
         └── strunk-and-white/                    # Edit prose for clarity and concision
 ```
 
