@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dictation to Artifact"
+  short_description: "Turn dictated text into polished artifacts"
+  default_prompt: "Use $dictation-to-artifact to transform this dictation into the artifact I specify."
