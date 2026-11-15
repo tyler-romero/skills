@@ -29,7 +29,8 @@ All four hosts support the open Agent Skills shape: a directory containing a `SK
         ├── read-arxiv-paper/                    # Analyze papers from TeX source
         ├── resolve-review-comments/             # Resolve PR feedback one thread at a time
         ├── show-me/                             # Explain topics with focused visuals
-        └── strunk-and-white/                    # Edit prose for clarity and concision
+        ├── strunk-and-white/                    # Edit prose for clarity and concision
+        └── write-like-a-human/                  # Avoid dense, hard-to-parse LLM prose
 ```
 
 The extra manifest and metadata files are additive. Hosts ignore files they do not understand.

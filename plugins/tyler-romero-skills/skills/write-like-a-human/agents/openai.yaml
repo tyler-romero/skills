@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Like a Human"
+  short_description: "Avoid over-compressed, hard-to-parse AI prose"
+  default_prompt: "Use $write-like-a-human to rewrite this passage so that it reads naturally to humans."
